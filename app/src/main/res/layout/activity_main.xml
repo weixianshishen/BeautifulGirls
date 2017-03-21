@@ -24,4 +24,19 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:elevation="4dp"
+        app:elevation="4dp"
+        app:layout_anchor="@id/srl_refresh"
+        app:borderWidth="0dp"
+        app:layout_anchorGravity="right|bottom"
+        app:layout_behavior="wxb.beautifulgirls.widget.ScrollAwareFABBehavior"
+        android:src="@mipmap/ic_github"/>
 </android.support.design.widget.CoordinatorLayout>

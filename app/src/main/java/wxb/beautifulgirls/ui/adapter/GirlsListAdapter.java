@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import wxb.beautifulgirls.R;
 import wxb.beautifulgirls.data.entity.Girl;
 import wxb.beautifulgirls.ui.GirlActivity;
+import wxb.beautifulgirls.ui.LearningActivity;
 
 /**
  * Created by 黑月 on 2017/3/10.
@@ -86,7 +87,9 @@ public class GirlsListAdapter extends RecyclerView.Adapter<GirlsListAdapter.Girl
     }
 
     private void clickTitle(int position) {
-
+        Intent intent = new Intent(mContext, LearningActivity.class);
+        intent.putExtra("date", mGirlList.get(position).getPublishedAt());
+        mContext.startActivity(intent);
     }
 
 }

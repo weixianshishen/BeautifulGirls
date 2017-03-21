@@ -8,10 +8,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import wxb.beautifulgirls.R;
+import wxb.beautifulgirls.ui.WebActivity;
 
 /**
  * Created by 黑月 on 2017/3/10.
@@ -21,6 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
+    protected boolean mIsHidden = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 如果存在Toolbar在子类中调用setToolbar方法
      *
      * @param isBack
-     * @param title
      */
-    protected void setToolbar(boolean isBack, String title) {
+    protected void setToolbar(boolean isBack) {
         mAppBar = (AppBarLayout) findViewById(R.id.appbar);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mAppBar == null || mToolbar == null) {
@@ -45,13 +47,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         mToolbar.setOnClickListener(view -> onToolbarClick());
         setSupportActionBar(mToolbar);
-        setTitle(title);
         if (isBack) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
+    protected void setAppBarAlpha(float alpha) {
+        mAppBar.setAlpha(alpha);
+    }
+    protected void hideOrShowToolbar() {
+        mAppBar.animate()
+                .translationY(mIsHidden ? 0 : -mAppBar.getHeight())
+                .setInterpolator(new DecelerateInterpolator(2))
+                .start();
+        mIsHidden = !mIsHidden;
+    }
+
+    
     protected abstract int getLayoutId();
 
     /**
@@ -148,12 +161,22 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_login:
+                loginGitHub();
+                return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loginGitHub() {
+        String url = getString(R.string.url_login_github);
+        Intent intent = WebActivity.newIntent(this, url,
+                getString(R.string.action_github_login));
+        startActivity(intent);
     }
 
 }

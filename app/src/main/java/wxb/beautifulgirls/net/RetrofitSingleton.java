@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import rx.Observable;
 import wxb.beautifulgirls.constant.Constants;
+import wxb.beautifulgirls.data.GankDatas;
 import wxb.beautifulgirls.data.GirlDatas;
 
 /**
@@ -72,6 +73,10 @@ public class RetrofitSingleton {
 
     public Observable<GirlDatas> getGirlDatas(int page) {
         return sGankApi.getGirls(page).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    public Observable<GankDatas> getLearnDatas(int year, int month, int day) {
+        return sGankApi.getLearnData(year, month, day).compose(RxUtils.rxSchedulerHelper());
     }
 
 }

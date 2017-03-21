@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -8,7 +9,7 @@ android {
     defaultConfig {
         applicationId "wxb.beautifulgirls"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,6 +25,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    greendao {
+        schemaVersion 1 //数据库版本号
+        daoPackage 'wxb.beautifulgirls.db.dao'
+        targetGenDir 'src/main/java/'
+    }
+
 }
 
 dependencies {
@@ -33,7 +41,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:cardview-v7:25.2.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.jakewharton:butterknife:8.5.1'
@@ -48,4 +56,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.9'
 }

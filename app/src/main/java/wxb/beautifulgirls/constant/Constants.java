@@ -6,4 +6,5 @@ package wxb.beautifulgirls.constant;
 
 public class Constants {
     public static final String BASE_URL = "http://gank.io/api/";
+    public static final int FRAGMENT_SIZE = 5;
 }

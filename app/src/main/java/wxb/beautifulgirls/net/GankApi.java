@@ -17,7 +17,7 @@ public interface GankApi {
     Observable<GirlDatas> getGirls(@Path("page") int page);
 
     @GET("day/{year}/{month}/{day}")
-    Observable<GankDatas> getGankData(
+    Observable<GankDatas> getLearnData(
             @Path("year") int year,
             @Path("month") int month,
             @Path("day") int day);
